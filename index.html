@@ -1,0 +1,1678 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ScamShield — One Click. Zero Scams. | Hackathon Pitch Deck</title>
+    <meta name="description" content="Ultra-premium, scroll-driven cinematic presentation website and pitch deck for ScamShield: Autonomous AI protection against elderly voice cloning and emergency fraud." />
+    <meta property="og:title" content="ScamShield — One Click. Zero Scams." />
+    <meta property="og:description" content="Scammers use AI to sound like your grandson. We use AI to protect your grandmother." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- AOS (Animate On Scroll) CSS via CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- Tailwind CSS v3 via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+              display: ['"Space Grotesk"', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            },
+            colors: {
+              obsidian: '#05070a',
+              emerald: {
+                400: '#34d399',
+                500: '#10b981',
+                600: '#059669',
+              },
+              neonGreen: '#22c55e',
+              dangerRed: '#ef4444',
+            },
+            animation: {
+              'pulse-fast': 'pulse 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'scan-line': 'scanLine 3s ease-in-out infinite',
+              'radar': 'radarSweep 4s linear infinite',
+              'float': 'float 6s ease-in-out infinite',
+            },
+            keyframes: {
+              scanLine: {
+                '0%': { top: '0%', opacity: '0.9' },
+                '50%': { opacity: '1' },
+                '100%': { top: '100%', opacity: '0.9' },
+              },
+              radarSweep: {
+                '0%': { transform: 'rotate(0deg)' },
+                '100%': { transform: 'rotate(360deg)' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+            },
+            boxShadow: {
+              'glow-safe': '0 0 35px -5px rgba(34, 197, 94, 0.35)',
+              'glow-danger': '0 0 35px -5px rgba(239, 68, 68, 0.35)',
+              'glow-cyber': '0 0 50px -10px rgba(16, 185, 129, 0.25)',
+              'scan-glow': '0 0 15px #22c55e',
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Custom scan line FX required by user brief */
+      .scan-line-fx {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #22c55e;
+        box-shadow: 0 0 15px #22c55e;
+        pointer-events: none;
+        z-index: 30;
+        animation: scanLineAnim 3.2s ease-in-out infinite alternate;
+      }
+
+      @keyframes scanLineAnim {
+        0% {
+          top: 0%;
+          opacity: 0.3;
+        }
+        20% {
+          opacity: 1;
+        }
+        80% {
+          opacity: 1;
+        }
+        100% {
+          top: 98%;
+          opacity: 0.3;
+        }
+      }
+
+      /* Noise overlay and grid background */
+      .bg-grid-cyber {
+        background-size: 40px 40px;
+        background-image: 
+          linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      }
+
+      .bg-radial-gradient {
+        background: radial-gradient(circle at 50% 0%, rgba(34, 197, 94, 0.12) 0%, rgba(5, 7, 10, 0) 70%);
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #09090b;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #27272a;
+        border-radius: 9999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #22c55e;
+      }
+
+      /* Glassmorphism utility */
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .glass-panel-hover:hover {
+        border-color: rgba(34, 197, 94, 0.4);
+        box-shadow: 0 0 30px rgba(34, 197, 94, 0.15);
+      }
+
+      /* Smooth transitions for threat triage */
+      .triage-card {
+        transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .triage-threat {
+        border-color: rgba(239, 68, 68, 0.65) !important;
+        box-shadow: 0 0 30px rgba(239, 68, 68, 0.35) !important;
+      }
+      .triage-neutralized {
+        border-color: rgba(34, 197, 94, 0.75) !important;
+        box-shadow: 0 0 35px rgba(34, 197, 94, 0.3) !important;
+      }
+    </style>
+  </head>
+
+  <body class="bg-neutral-950 text-white selection:bg-green-500/30 selection:text-green-300 font-sans antialiased overflow-x-hidden relative">
+    <!-- Top Global Presentation HUD Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-neutral-950/80 backdrop-blur-md border-b border-white/10 px-6 py-3 transition-all duration-300">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <!-- Logo & Project Identity -->
+        <div class="flex items-center gap-3">
+          <div class="relative flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-green-500 to-emerald-700 shadow-[0_0_15px_#22c55e]">
+            <svg class="w-5 h-5 text-neutral-950" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+            </svg>
+            <div class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-400 rounded-full animate-ping"></div>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-display font-black tracking-wider text-base text-white">SCAM<span class="text-green-400">SHIELD</span></span>
+              <span class="px-2 py-0.5 text-[10px] uppercase font-mono font-bold tracking-widest bg-green-500/10 text-green-400 border border-green-500/30 rounded-full">Pitch Deck</span>
+            </div>
+            <p class="text-[11px] text-neutral-400 font-mono hidden sm:block">AI-Driven Autonomous Defense for Seniors</p>
+          </div>
+        </div>
+
+        <!-- Slide Navigation Quick Links -->
+        <nav class="hidden md:flex items-center gap-1.5 text-xs font-mono">
+          <a href="#slide-1" class="nav-link px-3 py-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/5 transition-all">01 Hook</a>
+          <a href="#slide-2" class="nav-link px-3 py-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/5 transition-all">02 The Problem</a>
+          <a href="#slide-3" class="nav-link px-3 py-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/5 transition-all">03 Meet Rosa</a>
+          <a href="#slide-4" class="nav-link px-3 py-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/5 transition-all">04 Architecture</a>
+          <a href="#slide-5" class="nav-link px-3 py-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/5 transition-all">05 Eval Metrics</a>
+          <a href="#slide-6" class="nav-link px-3 py-1.5 rounded-lg text-neutral-400 hover:text-white hover:bg-white/5 transition-all">06 Core Laws</a>
+        </nav>
+
+        <!-- Presentation Controls & Audio Toggle -->
+        <div class="flex items-center gap-2">
+          <!-- Slide Counter -->
+          <div class="px-3 py-1 rounded-md bg-white/5 border border-white/10 text-xs font-mono text-neutral-300">
+            Slide <span id="currentSlideIndicator" class="text-green-400 font-bold">1</span> / 6
+          </div>
+
+          <!-- Sound Effects Toggle Button -->
+          <button id="soundToggleBtn" aria-label="Toggle Sound Effects" title="Toggle audio feedback" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-green-400 border border-white/10 transition-all flex items-center justify-center">
+            <svg id="soundOnIcon" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            </svg>
+            <svg id="soundOffIcon" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+            </svg>
+          </button>
+
+          <!-- Fullscreen Toggle -->
+          <button id="fullscreenBtn" aria-label="Toggle Fullscreen" title="Presentation Fullscreen (F)" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white border border-white/10 transition-all hidden sm:flex items-center justify-center">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+            </svg>
+          </button>
+
+          <!-- Download HTML Button -->
+          <button id="downloadDeckBtn" aria-label="Download Presentation HTML" title="Download Standalone index.html" class="p-2 px-2.5 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/30 transition-all flex items-center gap-1.5 text-xs font-mono cursor-pointer">
+            <svg class="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+            </svg>
+            <span class="hidden md:inline font-bold">Download HTML</span>
+          </button>
+
+          <!-- Next Slide Button -->
+          <button id="nextSlideBtn" class="px-3.5 py-1.5 rounded-lg bg-green-500 hover:bg-green-400 text-neutral-950 font-bold text-xs flex items-center gap-1.5 transition-all shadow-[0_0_15px_rgba(34,197,94,0.4)]">
+            <span>Next</span>
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Top Neon Scroll Progress Line -->
+      <div id="scrollProgressBar" class="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-emerald-500 via-green-400 to-teal-300 w-0 transition-all duration-150 shadow-[0_0_8px_#22c55e]"></div>
+    </header>
+
+    <!-- Floating Right-Side Slide Dots HUD -->
+    <aside class="fixed right-3 xl:right-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-end gap-3 pointer-events-auto">
+      <div class="flex flex-col items-center gap-3 bg-neutral-900/80 backdrop-blur-md p-2.5 rounded-full border border-white/10 shadow-xl">
+        <a href="#slide-1" class="slide-dot group relative flex items-center justify-end w-3.5 h-3.5" data-slide="1" aria-label="Go to Slide 1: The Hook">
+          <span class="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity bg-neutral-900 border border-white/15 px-2.5 py-1 rounded-md text-[11px] font-mono whitespace-nowrap text-white">01 The Hook</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-green-400 ring-4 ring-green-500/30 transition-all duration-300 dot-indicator"></span>
+        </a>
+        <a href="#slide-2" class="slide-dot group relative flex items-center justify-end w-3.5 h-3.5" data-slide="2" aria-label="Go to Slide 2: The Critical Problem">
+          <span class="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity bg-neutral-900 border border-white/15 px-2.5 py-1 rounded-md text-[11px] font-mono whitespace-nowrap text-white">02 The Problem</span>
+          <span class="w-2 h-2 rounded-full bg-neutral-600 hover:bg-white transition-all duration-300 dot-indicator"></span>
+        </a>
+        <a href="#slide-3" class="slide-dot group relative flex items-center justify-end w-3.5 h-3.5" data-slide="3" aria-label="Go to Slide 3: Meet Rosa">
+          <span class="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity bg-neutral-900 border border-white/15 px-2.5 py-1 rounded-md text-[11px] font-mono whitespace-nowrap text-white">03 Meet Rosa</span>
+          <span class="w-2 h-2 rounded-full bg-neutral-600 hover:bg-white transition-all duration-300 dot-indicator"></span>
+        </a>
+        <a href="#slide-4" class="slide-dot group relative flex items-center justify-end w-3.5 h-3.5" data-slide="4" aria-label="Go to Slide 4: How It Works">
+          <span class="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity bg-neutral-900 border border-white/15 px-2.5 py-1 rounded-md text-[11px] font-mono whitespace-nowrap text-white">04 Architecture</span>
+          <span class="w-2 h-2 rounded-full bg-neutral-600 hover:bg-white transition-all duration-300 dot-indicator"></span>
+        </a>
+        <a href="#slide-5" class="slide-dot group relative flex items-center justify-end w-3.5 h-3.5" data-slide="5" aria-label="Go to Slide 5: Real-World Testing">
+          <span class="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity bg-neutral-900 border border-white/15 px-2.5 py-1 rounded-md text-[11px] font-mono whitespace-nowrap text-white">05 Evaluation</span>
+          <span class="w-2 h-2 rounded-full bg-neutral-600 hover:bg-white transition-all duration-300 dot-indicator"></span>
+        </a>
+        <a href="#slide-6" class="slide-dot group relative flex items-center justify-end w-3.5 h-3.5" data-slide="6" aria-label="Go to Slide 6: The Core Laws">
+          <span class="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity bg-neutral-900 border border-white/15 px-2.5 py-1 rounded-md text-[11px] font-mono whitespace-nowrap text-white">06 Core Laws</span>
+          <span class="w-2 h-2 rounded-full bg-neutral-600 hover:bg-white transition-all duration-300 dot-indicator"></span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- MAIN SCROLL PRESENTATION CONTAINER -->
+    <main class="relative z-10 w-full">
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 1: THE HOOK (The Hero)                                              -->
+      <!-- ========================================================================= -->
+      <section id="slide-1" class="presentation-slide min-h-screen relative flex items-center justify-center pt-24 pb-16 px-6 lg:px-16 overflow-hidden bg-grid-cyber">
+        <!-- Ambient radial lighting -->
+        <div class="absolute inset-0 bg-radial-gradient pointer-events-none"></div>
+        <div class="absolute -top-32 -left-32 w-96 h-96 bg-green-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute top-1/2 -right-32 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[160px] pointer-events-none"></div>
+
+        <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
+          
+          <!-- Left Column: The Massive Pitch Hook -->
+          <div class="lg:col-span-7 flex flex-col items-start text-left" data-aos="fade-right" data-aos-duration="1000">
+            <!-- Super-tag / Pill -->
+            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-mono font-semibold tracking-wider mb-8">
+              <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+              AUTONOMOUS DEFENSE FOR VULNERABLE POPULATIONS
+            </div>
+
+            <!-- Massive Headline -->
+            <h1 class="font-display font-black tracking-tight text-5xl sm:text-6xl md:text-7xl xl:text-8xl text-white uppercase leading-[0.95] mb-6">
+              ONE CLICK.<br />
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-green-300 to-teal-200 drop-shadow-[0_0_35px_rgba(34,197,94,0.3)]">
+                ZERO SCAMS.
+              </span>
+            </h1>
+
+            <!-- Subtext Tagline -->
+            <p class="text-xl sm:text-2xl text-neutral-300 font-light leading-relaxed mb-8 max-w-2xl border-l-2 border-green-500/50 pl-4">
+              "Scammers use AI to sound like your grandson.<br class="hidden sm:inline" />
+              <span class="text-white font-medium">We use AI to protect your grandmother.</span>"
+            </p>
+
+            <!-- Key Strategic Pillars in Minimal Chips -->
+            <div class="flex flex-wrap gap-3 mb-10">
+              <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-neutral-300">
+                <svg class="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Zero-Click Headless Sandbox
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-neutral-300">
+                <svg class="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Spectrogram Voiceprint Check
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-neutral-300">
+                <svg class="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                Instant Family Liaison Protocol
+              </div>
+            </div>
+
+            <!-- Pitch Callouts -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+              <a href="#slide-2" class="px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-400 hover:to-green-400 text-neutral-950 font-bold text-base transition-all duration-200 shadow-[0_0_25px_rgba(34,197,94,0.4)] flex items-center justify-center gap-3 group">
+                <span>Start Pitch Deck</span>
+                <svg class="w-4 h-4 transition-transform group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                </svg>
+              </a>
+              <button id="triggerHeroScanDemo" class="px-6 py-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-white font-mono text-sm transition-all duration-200 flex items-center justify-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-green-400"></span>
+                <span>Test Live Extension Window</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Column: Floating Glassmorphic Extension UI Window -->
+          <div class="lg:col-span-5 flex justify-center" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+            <div id="heroExtensionCard" class="relative w-full max-w-md glass-panel rounded-2xl p-6 shadow-2xl border border-white/15 overflow-hidden transition-all duration-500 hover:shadow-glow-safe">
+              <!-- Visual Interactive FX: The Bright Neon-Green Scan Line requested in brief -->
+              <div class="scan-line-fx"></div>
+
+              <!-- Extension Window Chrome Header -->
+              <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                  <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                  <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                  <span class="ml-2 font-mono text-xs text-neutral-400 tracking-wide">ScamShield Guardian v2.4</span>
+                </div>
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-500/10 border border-green-500/30 text-[10px] font-mono text-green-400 font-semibold">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+                  READY
+                </div>
+              </div>
+
+              <!-- Message Intercept Preview -->
+              <div class="space-y-4 mb-6">
+                <div class="bg-black/50 border border-white/10 rounded-xl p-4">
+                  <div class="flex items-center justify-between text-[11px] font-mono text-neutral-400 mb-2">
+                    <span class="flex items-center gap-1.5 text-neutral-300">
+                      <svg class="w-3.5 h-3.5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                      </svg>
+                      Incoming MMS & Audio Clip
+                    </span>
+                    <span class="text-neutral-500">2 min ago</span>
+                  </div>
+                  <p class="text-xs text-neutral-200 font-sans leading-relaxed mb-3">
+                    "Grandma, it's me! I'm in jail. Please send $2,000 in gift cards right now."
+                  </p>
+                  
+                  <!-- Voice Spectrogram Simulation -->
+                  <div class="bg-neutral-900/90 rounded-lg p-2.5 border border-white/5 flex items-center gap-3">
+                    <div class="flex items-end gap-1 h-6">
+                      <span class="w-1 bg-green-500/70 h-3 rounded-full animate-pulse"></span>
+                      <span class="w-1 bg-green-400 h-5 rounded-full animate-pulse" style="animation-delay: 150ms"></span>
+                      <span class="w-1 bg-emerald-300 h-6 rounded-full animate-pulse" style="animation-delay: 300ms"></span>
+                      <span class="w-1 bg-green-400 h-4 rounded-full animate-pulse" style="animation-delay: 75ms"></span>
+                      <span class="w-1 bg-emerald-500 h-2 rounded-full animate-pulse" style="animation-delay: 200ms"></span>
+                      <span class="w-1 bg-green-300 h-5 rounded-full animate-pulse" style="animation-delay: 350ms"></span>
+                    </div>
+                    <div class="text-[11px] font-mono text-neutral-400 truncate">
+                      <span class="text-green-400">audio_sample_03.wav</span> (AI voice clone trace)
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Live Status / Result Panel -->
+                <div id="heroScanStatusArea" class="hidden p-3.5 rounded-xl bg-red-950/40 border border-red-500/40 text-red-200 text-xs font-mono transition-all">
+                  <div class="flex items-center gap-2 mb-1.5 font-bold text-red-400">
+                    <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <span>CRITICAL RISK (99.4% MALICIOUS)</span>
+                  </div>
+                  <p class="text-[11px] text-neutral-300">
+                    Synthetic voice artifact + gift card extortion template. Contacting verified caregiver: <strong class="text-white">Sarah (Daughter)</strong>.
+                  </p>
+                </div>
+              </div>
+
+              <!-- The Required Floating Scan Button -->
+              <button id="heroScanBtn" class="w-full py-4 px-6 rounded-xl font-bold text-sm tracking-wide text-neutral-950 bg-gradient-to-r from-emerald-400 via-green-400 to-teal-300 hover:from-emerald-300 hover:to-green-300 shadow-[0_0_25px_rgba(34,197,94,0.45)] hover:shadow-[0_0_35px_rgba(34,197,94,0.6)] active:scale-[0.98] transition-all flex items-center justify-center gap-3 cursor-pointer">
+                <svg class="w-5 h-5 text-neutral-950" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                </svg>
+                <span id="heroScanBtnText">[ Scan Message / Video ]</span>
+              </button>
+
+              <div class="mt-4 flex items-center justify-between text-[10px] font-mono text-neutral-500">
+                <span>Latency: 1.18s</span>
+                <span>Model: Multi-Vector Forensic Agent</span>
+                <span>Zero Data Retained</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Slide Down Arrow Indicator -->
+        <a href="#slide-2" class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center text-neutral-500 hover:text-green-400 transition-colors group">
+          <span class="text-[10px] font-mono tracking-widest uppercase mb-1">Slide 02</span>
+          <svg class="w-5 h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </a>
+      </section>
+
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 2: THE CRITICAL PROBLEM (The Data)                                  -->
+      <!-- ========================================================================= -->
+      <section id="slide-2" class="presentation-slide min-h-screen relative flex items-center justify-center py-24 px-6 lg:px-16 bg-neutral-950 border-t border-white/5">
+        <div class="max-w-7xl w-full mx-auto">
+          
+          <!-- Slide Title Pill -->
+          <div class="mb-4" data-aos="fade-up">
+            <span class="px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-mono font-bold tracking-widest uppercase">
+              02 / THE CRITICAL PROBLEM
+            </span>
+          </div>
+
+          <!-- 2-Column Spread Required by Brief -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+            
+            <!-- Left Column: Staggering FBI Stat & Impact -->
+            <div class="lg:col-span-7 flex flex-col items-start text-left" data-aos="fade-right" data-aos-duration="900">
+              <h2 class="font-display font-black tracking-tight text-4xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight">
+                An Industrialized Epidemic of Empathy Exploitation.
+              </h2>
+
+              <!-- Massive Staggering Highlight Stat -->
+              <div class="relative p-6 sm:p-8 rounded-2xl bg-white/5 border border-red-500/30 backdrop-blur-md shadow-glow-danger w-full mb-8 overflow-hidden">
+                <div class="absolute -right-8 -bottom-8 w-48 h-48 bg-red-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="text-xs font-mono text-red-400 font-bold uppercase tracking-wider mb-2 flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                  FBI IC3 2025 ELDER FRAUD REPORT
+                </div>
+                
+                <div class="font-display font-black text-6xl sm:text-7xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-amber-300 tracking-tight leading-none mb-3">
+                  $7.7 Billion
+                </div>
+                
+                <p class="text-lg sm:text-xl text-neutral-200 font-medium leading-snug">
+                  Lost in One Year by Americans aged 60+
+                </p>
+                <p class="text-xs text-neutral-400 font-mono mt-1">
+                  Source: Federal Bureau of Investigation (IC3) Official 2025 Annual Data Release
+                </p>
+              </div>
+
+              <!-- Supporting Stats Grid -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full mb-6">
+                <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                  <div class="font-display font-bold text-2xl sm:text-3xl text-white">+14% YoY</div>
+                  <div class="text-xs text-neutral-400 mt-1 font-mono">Surge in reported elder scam velocity</div>
+                </div>
+                <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                  <div class="font-display font-bold text-2xl sm:text-3xl text-white">101,000+</div>
+                  <div class="text-xs text-neutral-400 mt-1 font-mono">Identified senior victims in a single year</div>
+                </div>
+                <div class="p-4 rounded-xl bg-white/5 border border-white/10">
+                  <div class="font-display font-bold text-2xl sm:text-3xl text-red-400">$76,000</div>
+                  <div class="text-xs text-neutral-400 mt-1 font-mono">Average catastrophic loss per affected senior</div>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-white/5 border-l-4 border-red-500 text-sm text-neutral-300 font-sans leading-relaxed">
+                <strong class="text-white">Why traditional spam filters fail:</strong> Generative AI allows criminals to clone a grandchild's voice from a 3-second social media clip, mimic regional dialect, and weaponize manufactured panic before human scrutiny can intervene.
+              </div>
+            </div>
+
+            <!-- Right Column: Dark Mobile Device Viewport Simulation -->
+            <div class="lg:col-span-5 flex justify-center" data-aos="fade-left" data-aos-duration="900" data-aos-delay="200">
+              <div class="relative w-full max-w-[340px] rounded-[42px] p-3 bg-neutral-900 border-4 border-neutral-800 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] overflow-hidden">
+                <!-- Device Speaker & Front Camera Notch -->
+                <div class="absolute top-5 left-1/2 -translate-x-1/2 w-28 h-5 bg-black rounded-full z-30 flex items-center justify-center">
+                  <div class="w-10 h-1 bg-neutral-800 rounded-full"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-neutral-900 ml-2 border border-neutral-800"></div>
+                </div>
+
+                <!-- Mobile Screen Canvas -->
+                <div class="w-full bg-neutral-950 rounded-[32px] pt-12 pb-6 px-4 flex flex-col h-[580px] border border-white/10 relative overflow-hidden">
+                  
+                  <!-- Device Status Bar -->
+                  <div class="flex items-center justify-between text-[11px] font-mono text-neutral-400 px-2 mb-4">
+                    <span>9:41 AM</span>
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-[10px]">5G</span>
+                      <div class="w-4 h-2 rounded-sm border border-neutral-400 p-0.5">
+                        <div class="w-full h-full bg-neutral-400"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- SMS Header -->
+                  <div class="flex flex-col items-center pb-3 border-b border-white/10 mb-4 text-center">
+                    <div class="w-12 h-12 rounded-full bg-neutral-800 border border-white/10 flex items-center justify-center text-neutral-300 text-base font-bold mb-1 shadow-inner">
+                      ?
+                    </div>
+                    <div class="text-xs font-semibold text-white">Unknown Number</div>
+                    <div class="text-[10px] font-mono text-neutral-400">+1 (555) 019-8422 • Carrier: Prepaid VoIP</div>
+                  </div>
+
+                  <!-- Messages Body -->
+                  <div class="flex-1 space-y-3 overflow-y-auto pr-1">
+                    <div class="text-center text-[10px] font-mono text-neutral-500 my-1">
+                      Today 2:14 PM
+                    </div>
+
+                    <!-- Scam Message Bubble 1 -->
+                    <div class="bg-neutral-800/90 text-neutral-100 p-3.5 rounded-2xl rounded-tl-sm text-xs leading-relaxed border border-white/5 shadow-md">
+                      <p class="font-medium text-amber-200 mb-1">"Grandma, it's me! I'm in jail."</p>
+                      <p>I had a terrible car accident on the highway and the lawyer says I need $2,000 in gift cards right now to get out.</p>
+                    </div>
+
+                    <!-- Scam Message Bubble 2 -->
+                    <div class="bg-neutral-800/90 text-neutral-100 p-3 rounded-2xl rounded-tl-sm text-xs leading-relaxed border border-white/5">
+                      <p>Please don't call Mom or Dad, they'll disown me. Buy Target or Apple gift cards and text me the codes right now! Please hurry grandma, they're taking my phone!!</p>
+                    </div>
+
+                    <!-- ScamShield Live Forensic Analysis Overlay -->
+                    <div class="mt-4 p-3 rounded-xl bg-red-950/70 border border-red-500/70 text-red-200 text-xs shadow-glow-danger animate-pulse">
+                      <div class="flex items-center justify-between mb-1.5 font-mono text-[11px] font-bold text-red-400">
+                        <span class="flex items-center gap-1.5">
+                          <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                          SCAMSHIELD REAL-TIME TRACE
+                        </span>
+                        <span>CONFIDENCE 99.8%</span>
+                      </div>
+                      <div class="space-y-1 text-[10px] font-mono text-neutral-300">
+                        <div class="flex items-center justify-between">
+                          <span>Vector A:</span>
+                          <span class="text-red-400 font-bold">Impersonation & Panic Trigger</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                          <span>Vector B:</span>
+                          <span class="text-red-400 font-bold">Secrecy / Isolation Command</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                          <span>Vector C:</span>
+                          <span class="text-red-400 font-bold">Untraceable Gift Card Extortion</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Device Home Indicator -->
+                  <div class="w-28 h-1 bg-white/20 rounded-full mx-auto mt-2"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 3: MEET ROSA (Real-World Case Triages)                              -->
+      <!-- ========================================================================= -->
+      <section id="slide-3" class="presentation-slide min-h-screen relative flex items-center justify-center py-24 px-6 lg:px-16 bg-neutral-950/80 border-t border-white/5">
+        <div class="max-w-7xl w-full mx-auto">
+          
+          <!-- Section Title Header -->
+          <div class="flex flex-col md:flex-row md:items-end justify-between mb-12" data-aos="fade-up">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-mono font-bold tracking-widest uppercase mb-3">
+                03 / REAL-WORLD CASE TRIAGES
+              </div>
+              <h2 class="font-display font-black text-3xl sm:text-5xl text-white tracking-tight">
+                Meet Rosa, 74.
+              </h2>
+              <p class="text-neutral-400 text-base sm:text-lg max-w-2xl mt-2 font-light">
+                Targeted by three distinct coordinated attacks today. Notice how ScamShield's agent automatically identifies each threat without exposing Rosa's device.
+              </p>
+            </div>
+
+            <!-- Interactive Trigger All Button -->
+            <div class="mt-4 md:mt-0 flex items-center gap-3">
+              <button id="scanAllRosaBtn" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-xs font-mono text-green-400 hover:text-green-300 transition-all flex items-center gap-2 shadow-sm">
+                <svg class="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                <span>Trigger Live Agent Triage</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 3-Card Layout for the Three Distinct Mock Messages -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            
+            <!-- Card A: Bank Alert (Chase Target purchase simulation) -->
+            <div id="triageCardA" class="triage-card triage-threat relative glass-panel rounded-2xl p-6 border transition-all duration-700 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="100">
+              <!-- Scan line for Card A -->
+              <div class="scan-line-fx opacity-60"></div>
+
+              <div>
+                <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] font-mono text-neutral-300">
+                    CASE A: BANK ALERT
+                  </span>
+                  <span id="badgeCardA" class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/40">
+                    THREAT DETECTED
+                  </span>
+                </div>
+
+                <!-- Simulation Content -->
+                <div class="p-4 rounded-xl bg-black/60 border border-white/5 mb-4 text-xs font-sans space-y-2">
+                  <div class="flex items-center justify-between text-[10px] font-mono text-neutral-400">
+                    <span class="text-neutral-300 font-bold">SMS • Sender: ChaseSecurity-SMS</span>
+                    <span>10:18 AM</span>
+                  </div>
+                  <p class="text-neutral-200">
+                    "Chase Alert: Did you authorize $948.20 at Target Minneapolis? If NO, click <span class="text-red-400 underline decoration-red-400/50 font-mono">auth-chase-security.net/verify</span> immediately."
+                  </p>
+                </div>
+
+                <!-- Forensic Breakdown -->
+                <div class="space-y-2 text-[11px] font-mono">
+                  <div class="flex items-center justify-between text-neutral-400">
+                    <span>Domain Age:</span>
+                    <span class="text-red-400 font-bold">14 Hours Old (Moscow Registrar)</span>
+                  </div>
+                  <div class="flex items-center justify-between text-neutral-400">
+                    <span>Redirect Vector:</span>
+                    <span class="text-red-400 font-bold">Credential Harvest Form</span>
+                  </div>
+                  <div class="flex items-center justify-between text-neutral-400">
+                    <span>JPMorgan DNS Match:</span>
+                    <span class="text-red-400 font-bold">0% (Spoofed Origin)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Automated Tooltip Banner requested in user prompt -->
+              <div class="mt-6 pt-4 border-t border-white/10">
+                <div id="tooltipCardA" class="p-3 rounded-xl bg-neutral-900 border border-green-500/50 text-[11px] font-mono text-green-300 flex items-center gap-2 shadow-[0_0_15px_rgba(34,197,94,0.2)]">
+                  <svg class="w-4 h-4 text-green-400 shrink-0 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                  </svg>
+                  <span class="tooltip-text">ScamShield Agent checking link without opening... Scan complete.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card B: Delivery Text (USPS incomplete address link-trap) -->
+            <div id="triageCardB" class="triage-card triage-threat relative glass-panel rounded-2xl p-6 border transition-all duration-700 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="200">
+              <!-- Scan line for Card B -->
+              <div class="scan-line-fx opacity-60"></div>
+
+              <div>
+                <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] font-mono text-neutral-300">
+                    CASE B: DELIVERY TEXT
+                  </span>
+                  <span id="badgeCardB" class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/40">
+                    THREAT DETECTED
+                  </span>
+                </div>
+
+                <!-- Simulation Content -->
+                <div class="p-4 rounded-xl bg-black/60 border border-white/5 mb-4 text-xs font-sans space-y-2">
+                  <div class="flex items-center justify-between text-[10px] font-mono text-neutral-400">
+                    <span class="text-neutral-300 font-bold">SMS • Sender: USPS-TrackingHub</span>
+                    <span>11:42 AM</span>
+                  </div>
+                  <p class="text-neutral-200">
+                    "USPS Notice: Your package US-98842-X has an incomplete address and cannot be delivered. Update within 12h: <span class="text-red-400 underline decoration-red-400/50 font-mono">usps-postaltag-tracking.vip/redelivery</span>"
+                  </p>
+                </div>
+
+                <!-- Forensic Breakdown -->
+                <div class="space-y-2 text-[11px] font-mono">
+                  <div class="flex items-center justify-between text-neutral-400">
+                    <span>TLD Protocol:</span>
+                    <span class="text-red-400 font-bold">.vip (Non-Government)</span>
+                  </div>
+                  <div class="flex items-center justify-between text-neutral-400">
+                    <span>Payload:</span>
+                    <span class="text-red-400 font-bold">$1.95 Redelivery Card Trap</span>
+                  </div>
+                  <div class="flex items-center justify-between text-neutral-400">
+                    <span>USPS Manifest API:</span>
+                    <span class="text-red-400 font-bold">Zero Record for ID</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Automated Tooltip Banner requested in user prompt -->
+              <div class="mt-6 pt-4 border-t border-white/10">
+                <div id="tooltipCardB" class="p-3 rounded-xl bg-neutral-900 border border-green-500/50 text-[11px] font-mono text-green-300 flex items-center gap-2 shadow-[0_0_15px_rgba(34,197,94,0.2)]">
+                  <svg class="w-4 h-4 text-green-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="tooltip-text">ScamShield Agent checking link without opening... Scan complete.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card C: Grandparent Emergency (The urgency & secrecy trigger) -->
+            <div id="triageCardC" class="triage-card triage-threat relative glass-panel rounded-2xl p-6 border transition-all duration-700 flex flex-col justify-between" data-aos="fade-up" data-aos-delay="300">
+              <!-- Scan line for Card C -->
+              <div class="scan-line-fx opacity-60"></div>
+
+              <div>
+                <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-4">
+                  <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[10px] font-mono text-neutral-300">
+                    CASE C: GRANDPARENT EMERGENCY
+                  </span>
+                  <span id="badgeCardC" class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-red-500/20 text-red-400 border border-red-500/40">
+                    THREAT DETECTED
+                  </span>
+                </div>
+
+                <!-- Simulation Content -->
+                <div class="p-4 rounded-xl bg-black/60 border border-white/5 mb-4 text-xs font-sans space-y-2">
+                  <div class="flex items-center justify-between text-[10px] font-mono text-neutral-400">
+                    <span class="text-neutral-300 font-bold">SMS + Voice Note • Unknown</span>
+                    <span>1:15 PM</span>
+                  </div>
+                  <p class="text-neutral-200">
+                    "Grandma, I had an accident on I-95. Lawyer says I need $1,500 cash bail or I stay overnight. DO NOT tell mom, wire via Zelle right now."
+                  </p>
+                </div>
+
+                <!-- Forensic Breakdown -->
+                <div class="space-y-2 text-[11px] font-mono">
+                  <div class="flex items-center justify-between text-neutral-400">
+                    <span>Urgency Trigger:</span>
+                    <span class="text-red-400 font-bold">Bail / Overnight Detention</span>
+                  </div>
+                  <div class="flex items-center justify-between text-neutral-400">
+                    <span>Isolation Pattern:</span>
+                    <span class="text-red-400 font-bold">"DO NOT TELL MOM"</span>
+                  </div>
+                  <div class="flex items-center justify-between text-neutral-400">
+                    <span>Carlos Voice Match:</span>
+                    <span class="text-red-400 font-bold">Synthesized Clone Artifact</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Automated Tooltip Banner requested in user prompt -->
+              <div class="mt-6 pt-4 border-t border-white/10">
+                <div id="tooltipCardC" class="p-3 rounded-xl bg-neutral-900 border border-green-500/50 text-[11px] font-mono text-green-300 flex items-center gap-2 shadow-[0_0_15px_rgba(34,197,94,0.2)]">
+                  <svg class="w-4 h-4 text-green-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class="tooltip-text">ScamShield Agent checking link without opening... Scan complete.</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Summary of Rosa's Outcome -->
+          <div class="mt-10 p-5 rounded-2xl bg-white/5 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4" data-aos="fade-up">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center font-bold font-mono">
+                ✓
+              </div>
+              <div>
+                <h4 class="text-sm font-semibold text-white">Rosa's Result: 3 Threats Neutralized in Under 4 Seconds</h4>
+                <p class="text-xs text-neutral-400">Zero links opened. Rosa's daughter Sarah received one discreet dashboard notification.</p>
+              </div>
+            </div>
+            <div class="text-xs font-mono text-green-400 bg-green-500/10 px-3 py-1.5 rounded-lg border border-green-500/30">
+              Total Protected: $4,448.20
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 4: HOW IT WORKS (A Detective, Not a Filter)                         -->
+      <!-- ========================================================================= -->
+      <section id="slide-4" class="presentation-slide min-h-screen relative flex items-center justify-center py-24 px-6 lg:px-16 bg-neutral-950 border-t border-white/5">
+        <div class="max-w-7xl w-full mx-auto">
+          
+          <!-- Section Title Header -->
+          <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+            <span class="px-3.5 py-1.5 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-mono font-bold tracking-widest uppercase">
+              04 / ACTIVE AGENT ARCHITECTURE
+            </span>
+            <h2 class="font-display font-black text-4xl sm:text-6xl text-white tracking-tight mt-4 mb-4">
+              A Detective, Not a Filter.
+            </h2>
+            <p class="text-neutral-400 text-base sm:text-lg font-light leading-relaxed">
+              Standard spam filters rely on static blocklists that scammers swap in 10 minutes. ScamShield deploys an autonomous 5-step investigative workflow.
+            </p>
+          </div>
+
+          <!-- The Beautiful 5-Step Agent Execution Sequence -->
+          <div class="relative">
+            <!-- Connecting Beam Line for Desktop -->
+            <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-[2px] bg-gradient-to-r from-emerald-500/20 via-green-400/80 to-teal-400/20 -translate-y-1/2 z-0"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-3 relative z-10">
+              
+              <!-- Step 1: PLAN -->
+              <div class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-green-500/50 transition-all duration-300 flex flex-col justify-between group hover:shadow-glow-safe" data-aos="fade-up" data-aos-delay="100">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="w-8 h-8 rounded-lg bg-green-500/20 border border-green-500/40 text-green-400 font-mono text-xs font-bold flex items-center justify-center">
+                      01
+                    </span>
+                    <span class="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">Step 1</span>
+                  </div>
+                  <h3 class="font-display font-bold text-lg text-white mb-2">Plan</h3>
+                  <p class="text-xs text-neutral-300 font-sans leading-relaxed">
+                    Decides exactly what vectors to check based on incoming content: domain registries, urgency cues, audio spectrograms, and OCR metadata.
+                  </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 font-mono text-[10px] text-green-400 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                  Dynamic Vector Graph
+                </div>
+              </div>
+
+              <!-- Step 2: INVESTIGATE -->
+              <div class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-green-500/50 transition-all duration-300 flex flex-col justify-between group hover:shadow-glow-safe" data-aos="fade-up" data-aos-delay="200">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="w-8 h-8 rounded-lg bg-green-500/20 border border-green-500/40 text-green-400 font-mono text-xs font-bold flex items-center justify-center">
+                      02
+                    </span>
+                    <span class="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">Step 2</span>
+                  </div>
+                  <h3 class="font-display font-bold text-lg text-white mb-2">Investigate</h3>
+                  <p class="text-xs text-neutral-300 font-sans leading-relaxed">
+                    Resolves destination links, domains, reputation data, SSL telemetry, and video pixels in an isolated zero-click headless sandbox.
+                  </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 font-mono text-[10px] text-green-400 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                  Zero-Click Quarantine
+                </div>
+              </div>
+
+              <!-- Step 3: VERIFY -->
+              <div class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-green-500/50 transition-all duration-300 flex flex-col justify-between group hover:shadow-glow-safe" data-aos="fade-up" data-aos-delay="300">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="w-8 h-8 rounded-lg bg-green-500/20 border border-green-500/40 text-green-400 font-mono text-xs font-bold flex items-center justify-center">
+                      03
+                    </span>
+                    <span class="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">Step 3</span>
+                  </div>
+                  <h3 class="font-display font-bold text-lg text-white mb-2">Verify</h3>
+                  <p class="text-xs text-neutral-300 font-sans leading-relaxed">
+                    Weighs extracted evidence against scam claims: cross-references official bank communication policies, postal carrier APIs, and public jail rosters.
+                  </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 font-mono text-[10px] text-green-400 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                  Official Registry Check
+                </div>
+              </div>
+
+              <!-- Step 4: VERDICT -->
+              <div class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-green-500/50 transition-all duration-300 flex flex-col justify-between group hover:shadow-glow-safe" data-aos="fade-up" data-aos-delay="400">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="w-8 h-8 rounded-lg bg-green-500/20 border border-green-500/40 text-green-400 font-mono text-xs font-bold flex items-center justify-center">
+                      04
+                    </span>
+                    <span class="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">Step 4</span>
+                  </div>
+                  <h3 class="font-display font-bold text-lg text-white mb-2">Verdict</h3>
+                  <p class="text-xs text-neutral-300 font-sans leading-relaxed">
+                    Computes an explicit threat assessment plus an accurate confidence score with calibrated thresholds to eliminate false alarms.
+                  </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 font-mono text-[10px] text-green-400 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                  Calibrated Risk Matrix
+                </div>
+              </div>
+
+              <!-- Step 5: ACT -->
+              <div class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-green-500/50 transition-all duration-300 flex flex-col justify-between group hover:shadow-glow-safe" data-aos="fade-up" data-aos-delay="500">
+                <div>
+                  <div class="flex items-center justify-between mb-4">
+                    <span class="w-8 h-8 rounded-lg bg-green-500/20 border border-green-500/40 text-green-400 font-mono text-xs font-bold flex items-center justify-center">
+                      05
+                    </span>
+                    <span class="text-[10px] font-mono text-neutral-400 uppercase tracking-wider">Step 5</span>
+                  </div>
+                  <h3 class="font-display font-bold text-lg text-white mb-2">Act</h3>
+                  <p class="text-xs text-neutral-300 font-sans leading-relaxed">
+                    Family alert dispatching and tactical damage control: notifies trusted caregivers, disables destructive taps, and provides safe response scripts.
+                  </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-white/10 font-mono text-[10px] text-green-400 flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                  Family Shield Protocol
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Architecture Highlight Callout -->
+          <div class="mt-12 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md flex flex-col lg:flex-row items-center justify-between gap-6" data-aos="fade-up">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-400 shrink-0">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-display font-bold text-base text-white">Full Autonomous Triage in 1.18 Seconds</h4>
+                <p class="text-xs text-neutral-400 font-sans">
+                  The entire 5-step investigative loop runs asynchronously before the senior ever taps or replies. Zero friction for legitimate family conversations.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 font-mono text-xs">
+              <span class="px-3 py-1.5 rounded-lg bg-neutral-900 border border-white/10 text-neutral-300">Sandbox Isolation</span>
+              <span class="text-neutral-500">→</span>
+              <span class="px-3 py-1.5 rounded-lg bg-neutral-900 border border-white/10 text-neutral-300">Evidence Graph</span>
+              <span class="text-neutral-500">→</span>
+              <span class="px-3 py-1.5 rounded-lg bg-green-500/20 border border-green-500/40 text-green-300">Family Peace of Mind</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 5: REAL-WORLD TESTING (The Evaluation Metrics)                      -->
+      <!-- ========================================================================= -->
+      <section id="slide-5" class="presentation-slide min-h-screen relative flex items-center justify-center py-24 px-6 lg:px-16 bg-neutral-950/90 border-t border-white/5">
+        <div class="max-w-7xl w-full mx-auto">
+          
+          <!-- Slide Title Header -->
+          <div class="mb-12" data-aos="fade-up">
+            <span class="px-3.5 py-1.5 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-mono font-bold tracking-widest uppercase mb-3 inline-block">
+              05 / REAL-WORLD TESTING
+            </span>
+            <h2 class="font-display font-black text-3xl sm:text-5xl text-white tracking-tight">
+              Rigorous Empirical Benchmarks.
+            </h2>
+            <p class="text-neutral-400 text-base sm:text-lg max-w-2xl mt-2 font-light">
+              We evaluated ScamShield across real-world multi-channel attack scenarios in English, Spanish, and French.
+            </p>
+          </div>
+
+          <!-- Data-Dense Dashboard Layout Required by Brief -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Left Column: Clean Grid Stats Counters -->
+            <div class="lg:col-span-5 space-y-4" data-aos="fade-right" data-aos-duration="800">
+              
+              <!-- 4 Primary Metric Cards Required by Brief -->
+              <div class="grid grid-cols-2 gap-4">
+                
+                <!-- Counter 1: 30 Labelled Cases -->
+                <div class="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-green-500/30 transition-all">
+                  <div class="flex items-center justify-between text-[11px] font-mono text-neutral-400 mb-1">
+                    <span>TEST CORPUS</span>
+                    <svg class="w-3.5 h-3.5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <div class="font-display font-black text-4xl sm:text-5xl text-white">30</div>
+                  <div class="text-xs font-medium text-neutral-300 mt-1">Labelled Cases</div>
+                  <div class="text-[10px] font-mono text-neutral-500 mt-2">Verified adversarial benchmark</div>
+                </div>
+
+                <!-- Counter 2: 20 Scam Cases -->
+                <div class="p-5 rounded-2xl bg-white/5 border border-red-500/30 backdrop-blur-md hover:shadow-glow-danger transition-all">
+                  <div class="flex items-center justify-between text-[11px] font-mono text-red-400 mb-1">
+                    <span>ATTACK PAYLOADS</span>
+                    <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                  </div>
+                  <div class="font-display font-black text-4xl sm:text-5xl text-red-400">20</div>
+                  <div class="text-xs font-medium text-neutral-300 mt-1">Scam Cases</div>
+                  <div class="text-[10px] font-mono text-neutral-500 mt-2">100% Intercepted (0 Missed)</div>
+                </div>
+
+                <!-- Counter 3: 10 Legitimate Cases -->
+                <div class="p-5 rounded-2xl bg-white/5 border border-green-500/30 backdrop-blur-md hover:shadow-glow-safe transition-all">
+                  <div class="flex items-center justify-between text-[11px] font-mono text-green-400 mb-1">
+                    <span>LEGIT PAYLOADS</span>
+                    <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                  </div>
+                  <div class="font-display font-black text-4xl sm:text-5xl text-green-400">10</div>
+                  <div class="text-xs font-medium text-neutral-300 mt-1">Legitimate Cases</div>
+                  <div class="text-[10px] font-mono text-neutral-500 mt-2">0 False Positives</div>
+                </div>
+
+                <!-- Counter 4: 3 Languages Supported (EN, ES, FR) -->
+                <div class="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-teal-500/30 transition-all">
+                  <div class="flex items-center justify-between text-[11px] font-mono text-neutral-400 mb-1">
+                    <span>MULTILINGUAL</span>
+                    <span class="text-teal-400 font-bold font-mono">EN·ES·FR</span>
+                  </div>
+                  <div class="font-display font-black text-4xl sm:text-5xl text-teal-300">3</div>
+                  <div class="text-xs font-medium text-neutral-300 mt-1">Languages Supported</div>
+                  <div class="text-[10px] font-mono text-neutral-500 mt-2">Native cultural dialect checks</div>
+                </div>
+
+              </div>
+
+              <!-- Extra Performance Highlights Card -->
+              <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3 font-mono text-xs">
+                <div class="flex items-center justify-between pb-2 border-b border-white/10">
+                  <span class="text-neutral-400">Model Precision:</span>
+                  <span class="text-green-400 font-bold">100.0% (Zero False Alarms)</span>
+                </div>
+                <div class="flex items-center justify-between pb-2 border-b border-white/10">
+                  <span class="text-neutral-400">Model Recall:</span>
+                  <span class="text-green-400 font-bold">100.0% (All Scams Caught)</span>
+                </div>
+                <div class="flex items-center justify-between pb-2 border-b border-white/10">
+                  <span class="text-neutral-400">F1 Combined Score:</span>
+                  <span class="text-green-400 font-bold">1.000 (Top-Tier Grade)</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-neutral-400">Avg Decision Latency:</span>
+                  <span class="text-white font-bold">1.18 Seconds</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right Column: Mock Terminal Console Execution Output -->
+            <div class="lg:col-span-7" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+              <div class="rounded-2xl bg-black border border-white/15 shadow-2xl overflow-hidden font-mono text-xs">
+                
+                <!-- Terminal Window Chrome -->
+                <div class="flex items-center justify-between px-4 py-3 bg-neutral-900 border-b border-white/10">
+                  <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                    <span class="ml-2 text-neutral-400 text-[11px]">zsh — scamshield-eval-runner</span>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <span class="text-[10px] text-neutral-500">node v22.14.0</span>
+                    <button id="rerunEvalBtn" class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-green-400 text-[11px] flex items-center gap-1.5 transition-all">
+                      <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                      </svg>
+                      <span>Re-run Suite</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Terminal Execution Body with Color-Coded Logs -->
+                <div id="terminalBody" class="p-5 space-y-2 text-neutral-300 leading-relaxed max-h-[460px] overflow-y-auto">
+                  <div class="text-neutral-400 flex items-center gap-2">
+                    <span class="text-green-400 font-bold">➜</span>
+                    <span class="text-cyan-300">scamshield-core</span>
+                    <span class="text-neutral-200">$ npx tsx scripts/eval.ts</span>
+                  </div>
+
+                  <div class="text-neutral-400 pt-1">
+                    [ScamShield Evaluation Matrix v2.4.0 — Target: 30 Labelled Scenarios]
+                  </div>
+
+                  <!-- Test Suite Output Lines -->
+                  <div class="space-y-1.5 pt-2">
+                    <div class="flex items-center justify-between text-neutral-300">
+                      <span><span class="text-green-400 font-bold">✔ [EN-01]</span> Grandparent Bail Urgent Extortion</span>
+                      <span class="text-red-400 font-bold">[SCAM_DETECTED 99.8%] 182ms</span>
+                    </div>
+                    <div class="flex items-center justify-between text-neutral-300">
+                      <span><span class="text-green-400 font-bold">✔ [EN-02]</span> Chase Bank Fake Verification Link</span>
+                      <span class="text-red-400 font-bold">[SCAM_DETECTED 99.4%] 214ms</span>
+                    </div>
+                    <div class="flex items-center justify-between text-neutral-300">
+                      <span><span class="text-green-400 font-bold">✔ [EN-03]</span> USPS Address Redelivery Smishing</span>
+                      <span class="text-red-400 font-bold">[SCAM_DETECTED 99.1%] 165ms</span>
+                    </div>
+                    <div class="flex items-center justify-between text-neutral-300">
+                      <span><span class="text-green-400 font-bold">✔ [ES-04]</span> Accidente Madrid Extorsión Familiar</span>
+                      <span class="text-red-400 font-bold">[SCAM_DETECTED 99.0%] 198ms</span>
+                    </div>
+                    <div class="flex items-center justify-between text-neutral-300">
+                      <span><span class="text-green-400 font-bold">✔ [FR-05]</span> La Poste Frais Dédouanement Faux</span>
+                      <span class="text-red-400 font-bold">[SCAM_DETECTED 98.7%] 174ms</span>
+                    </div>
+                    <div class="flex items-center justify-between text-neutral-300">
+                      <span><span class="text-green-400 font-bold">✔ [EN-06]</span> Chase Official Shortcode 24273</span>
+                      <span class="text-green-400 font-bold">[LEGIT_CLEARED 0.0%] 112ms</span>
+                    </div>
+                    <div class="flex items-center justify-between text-neutral-300">
+                      <span><span class="text-green-400 font-bold">✔ [EN-07]</span> Real CVS Prescription Ready SMS</span>
+                      <span class="text-green-400 font-bold">[LEGIT_CLEARED 0.0%] 98ms</span>
+                    </div>
+                    <div class="flex items-center justify-between text-neutral-400 text-[11px] italic">
+                      <span>... [23 additional test vectors executed successfully across EN, ES, FR]</span>
+                      <span class="text-neutral-500">All Passed</span>
+                    </div>
+                  </div>
+
+                  <!-- Terminal Evaluation Summary Table -->
+                  <div class="pt-3 border-t border-white/10 text-neutral-200">
+                    <pre class="text-[11px] leading-tight text-neutral-400">
+┌───────────────────────┬──────────┬──────────┬──────────┐
+│ METRIC                │ TARGET   │ RESULT   │ STATUS   │
+├───────────────────────┼──────────┼──────────┼──────────┤
+│ Total Labelled Cases  │ 30       │ 30       │ 100%     │
+│ Scam Interceptions    │ 20/20    │ 20/20    │ PASSED   │
+│ False Alarms (FP)     │ 0        │ 0        │ ZERO     │
+│ Languages Evaluated   │ EN/ES/FR │ 3 Langs  │ 100%     │
+│ Precision / Recall    │ &gt;95.0%   │ 1.000    │ OPTIMAL  │
+└───────────────────────┴──────────┴──────────┴──────────┘</pre>
+                  </div>
+
+                  <div class="pt-2 text-green-400 font-bold flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    <span>SUCCESS: 30 of 30 tests passed in 1,180ms. Ready for production pitch.</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ========================================================================= -->
+      <!-- SLIDE 6: THE CORE LAWS (Safety Framework)                                 -->
+      <!-- ========================================================================= -->
+      <section id="slide-6" class="presentation-slide min-h-screen relative flex items-center justify-center py-24 px-6 lg:px-16 bg-neutral-950 border-t border-white/5">
+        <div class="max-w-7xl w-full mx-auto">
+          
+          <!-- Slide Title Header -->
+          <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+            <span class="px-3.5 py-1.5 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-mono font-bold tracking-widest uppercase">
+              06 / SAFETY FRAMEWORK
+            </span>
+            <h2 class="font-display font-black text-4xl sm:text-6xl text-white tracking-tight mt-4 mb-4">
+              The Core Laws of ScamShield.
+            </h2>
+            <p class="text-neutral-400 text-base sm:text-lg font-light leading-relaxed">
+              Autonomous defense for seniors requires constitutional safety parameters. Our multi-agent system operates under four foundational laws.
+            </p>
+          </div>
+
+          <!-- Four Crisp Bullet Columns Required by Brief -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Law 1: False Alarms Matter -->
+            <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-green-500/50 transition-all duration-300 flex flex-col justify-between group hover:shadow-glow-safe" data-aos="fade-up" data-aos-delay="100">
+              <div>
+                <div class="w-10 h-10 rounded-xl bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-400 font-mono font-bold text-sm mb-5 group-hover:scale-110 transition-transform">
+                  01
+                </div>
+                <h3 class="font-display font-bold text-xl text-white mb-3">
+                  False Alarms Matter
+                </h3>
+                <p class="text-xs text-neutral-300 font-sans leading-relaxed">
+                  A false positive destroys senior trust. If an elderly user gets panicked by a legitimate hospital or bank text, they abandon the tool. We calibrate our detection threshold for absolute zero false alarms.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-white/10 text-[11px] font-mono text-green-400">
+                Precision &gt; Overreaction
+              </div>
+            </div>
+
+            <!-- Law 2: Check the Claim, Not Just Pixels -->
+            <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-green-500/50 transition-all duration-300 flex flex-col justify-between group hover:shadow-glow-safe" data-aos="fade-up" data-aos-delay="200">
+              <div>
+                <div class="w-10 h-10 rounded-xl bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-400 font-mono font-bold text-sm mb-5 group-hover:scale-110 transition-transform">
+                  02
+                </div>
+                <h3 class="font-display font-bold text-xl text-white mb-3">
+                  Check the Claim, Not Just Pixels
+                </h3>
+                <p class="text-xs text-neutral-300 font-sans leading-relaxed">
+                  Scammers can copy high-resolution logos, CSS, and familiar voices with ease. ScamShield examines systemic veracity: domain registration age, DNS authorities, out-of-band registries, and cryptographic roots.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-white/10 text-[11px] font-mono text-green-400">
+                Forensics &gt; Surface Visuals
+              </div>
+            </div>
+
+            <!-- Law 3: Official Verification First -->
+            <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-green-500/50 transition-all duration-300 flex flex-col justify-between group hover:shadow-glow-safe" data-aos="fade-up" data-aos-delay="300">
+              <div>
+                <div class="w-10 h-10 rounded-xl bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-400 font-mono font-bold text-sm mb-5 group-hover:scale-110 transition-transform">
+                  03
+                </div>
+                <h3 class="font-display font-bold text-xl text-white mb-3">
+                  Official Verification First
+                </h3>
+                <p class="text-xs text-neutral-300 font-sans leading-relaxed">
+                  Never follow caller-provided callbacks or verification links. ScamShield cross-references independent, officially vetted registries (FDIC records, verified postal endpoints, and municipal jail directories).
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-white/10 text-[11px] font-mono text-green-400">
+                Out-of-Band Validation
+              </div>
+            </div>
+
+            <!-- Law 4: When Uncertain, Output: "Be Careful" -->
+            <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-green-500/50 transition-all duration-300 flex flex-col justify-between group hover:shadow-glow-safe" data-aos="fade-up" data-aos-delay="400">
+              <div>
+                <div class="w-10 h-10 rounded-xl bg-green-500/10 border border-green-500/30 flex items-center justify-center text-green-400 font-mono font-bold text-sm mb-5 group-hover:scale-110 transition-transform">
+                  04
+                </div>
+                <h3 class="font-display font-bold text-xl text-white mb-3">
+                  When Uncertain, Output: "Be Careful"
+                </h3>
+                <p class="text-xs text-neutral-300 font-sans leading-relaxed">
+                  Progressive friction over alarmism. If an agent has partial signal, it does not scream threat. It outputs a calm, guided advisory: "Be Careful", locks high-risk actions, and routes to a trusted family contact.
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-white/10 text-[11px] font-mono text-green-400">
+                Graceful Fail-Safe
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Grand Pitch Deck Call to Action / Pitch Close -->
+          <div class="mt-16 p-8 sm:p-12 rounded-3xl bg-gradient-to-b from-white/10 to-white/5 border border-white/15 text-center relative overflow-hidden shadow-glow-cyber" data-aos="zoom-in">
+            <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-green-500/20 rounded-full blur-[120px] pointer-events-none"></div>
+
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-green-500/20 border border-green-500/40 text-green-300 text-xs font-mono font-bold tracking-widest uppercase mb-4">
+              PITCH CONCLUSION &amp; ASK
+            </span>
+
+            <h3 class="font-display font-black text-3xl sm:text-5xl text-white mb-4 tracking-tight">
+              Protecting Those Who Protected Us.
+            </h3>
+
+            <p class="text-neutral-300 text-base sm:text-lg max-w-2xl mx-auto mb-8 font-light leading-relaxed">
+              ScamShield isn't just an AI project. It's a generational shield restoring dignity, financial safety, and family trust to 60+ million elderly Americans.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a href="#slide-1" class="px-8 py-4 rounded-xl bg-green-500 hover:bg-green-400 text-neutral-950 font-bold text-sm tracking-wide transition-all shadow-[0_0_25px_rgba(34,197,94,0.4)] flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                </svg>
+                <span>Replay Pitch From Slide 1</span>
+              </a>
+              <button id="downloadDeckBtnFooter" class="px-6 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-400 hover:to-green-400 text-neutral-950 font-mono font-bold text-xs transition-all shadow-[0_0_20px_rgba(34,197,94,0.35)] flex items-center gap-2 cursor-pointer">
+                <svg class="w-4 h-4 text-neutral-950" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                </svg>
+                <span>Download Standalone HTML</span>
+              </button>
+              <button onclick="window.print()" class="px-6 py-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/20 text-white font-mono text-xs transition-all flex items-center gap-2">
+                <svg class="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+                <span>Export PDF / Print</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Deck Footer -->
+          <footer class="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-neutral-500 gap-4">
+            <div>ScamShield Hackathon Pitch Presentation • Powered by Autonomous Agent Architecture</div>
+            <div class="flex items-center gap-4">
+              <span>Press [Space] to glide</span>
+              <span>•</span>
+              <span>Obsidian Cinematic Theme</span>
+            </div>
+          </footer>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- AOS (Animate On Scroll) JS via CDN -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <!-- Interactive Pitch Deck Scripts -->
+    <script>
+      // Initialize AOS with smooth scroll settings
+      document.addEventListener('DOMContentLoaded', () => {
+        if (typeof AOS !== 'undefined') {
+          AOS.init({
+            duration: 800,
+            once: false,
+            mirror: true,
+            offset: 90,
+            easing: 'ease-out-cubic',
+          });
+        }
+      });
+
+      // Sound FX using Web Audio API (100% self-contained, no external mp3 assets needed)
+      let soundEnabled = false;
+      let audioCtx = null;
+
+      function getAudioContext() {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return audioCtx;
+      }
+
+      function playCyberBeep(freq = 600, duration = 0.08, type = 'sine') {
+        if (!soundEnabled) return;
+        try {
+          const ctx = getAudioContext();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, ctx.currentTime);
+          gain.gain.setValueAtTime(0.08, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + duration);
+        } catch (e) {
+          // Audio disabled or blocked by browser policy
+        }
+      }
+
+      function playScanChime() {
+        if (!soundEnabled) return;
+        playCyberBeep(440, 0.06);
+        setTimeout(() => playCyberBeep(880, 0.12), 80);
+      }
+
+      // Sound toggle UI
+      const soundToggleBtn = document.getElementById('soundToggleBtn');
+      const soundOnIcon = document.getElementById('soundOnIcon');
+      const soundOffIcon = document.getElementById('soundOffIcon');
+
+      soundToggleBtn?.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        if (soundEnabled) {
+          getAudioContext();
+          soundOnIcon.classList.remove('hidden');
+          soundOffIcon.classList.add('hidden');
+          soundToggleBtn.classList.add('text-green-400');
+          playScanChime();
+        } else {
+          soundOnIcon.classList.add('hidden');
+          soundOffIcon.classList.remove('hidden');
+          soundToggleBtn.classList.remove('text-green-400');
+        }
+      });
+
+      // Fullscreen Toggle
+      const fullscreenBtn = document.getElementById('fullscreenBtn');
+      fullscreenBtn?.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          }
+        }
+      });
+
+      // Slide Tracking & Scroll Progress
+      const slides = [
+        document.getElementById('slide-1'),
+        document.getElementById('slide-2'),
+        document.getElementById('slide-3'),
+        document.getElementById('slide-4'),
+        document.getElementById('slide-5'),
+        document.getElementById('slide-6'),
+      ];
+
+      const currentSlideIndicator = document.getElementById('currentSlideIndicator');
+      const scrollProgressBar = document.getElementById('scrollProgressBar');
+      const dotIndicators = document.querySelectorAll('.slide-dot .dot-indicator');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      let currentSlideIndex = 0;
+
+      function updateSlideOnScroll() {
+        const scrollY = window.scrollY;
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = Math.min(100, Math.max(0, (scrollY / totalHeight) * 100));
+
+        if (scrollProgressBar) {
+          scrollProgressBar.style.width = `${progress}%`;
+        }
+
+        // Determine active slide
+        let activeIdx = 0;
+        slides.forEach((slide, idx) => {
+          if (slide) {
+            const rect = slide.getBoundingClientRect();
+            if (rect.top <= window.innerHeight * 0.45) {
+              activeIdx = idx;
+            }
+          }
+        });
+
+        if (activeIdx !== currentSlideIndex) {
+          currentSlideIndex = activeIdx;
+          if (currentSlideIndicator) {
+            currentSlideIndicator.textContent = activeIdx + 1;
+          }
+
+          // Update right-side dots
+          dotIndicators.forEach((dot, idx) => {
+            if (idx === activeIdx) {
+              dot.className = 'w-2.5 h-2.5 rounded-full bg-green-400 ring-4 ring-green-500/30 transition-all duration-300 dot-indicator';
+            } else {
+              dot.className = 'w-2 h-2 rounded-full bg-neutral-600 hover:bg-white transition-all duration-300 dot-indicator';
+            }
+          });
+
+          // Update top nav links
+          navLinks.forEach((link, idx) => {
+            if (idx === activeIdx) {
+              link.classList.add('text-green-400', 'bg-white/10');
+              link.classList.remove('text-neutral-400');
+            } else {
+              link.classList.remove('text-green-400', 'bg-white/10');
+              link.classList.add('text-neutral-400');
+            }
+          });
+        }
+      }
+
+      window.addEventListener('scroll', updateSlideOnScroll, { passive: true });
+      window.addEventListener('resize', updateSlideOnScroll, { passive: true });
+      updateSlideOnScroll();
+
+      // Keyboard Presentation Controls (Space, ArrowDown, PageDown -> Next Slide; ArrowUp, PageUp -> Prev)
+      window.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+        if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ' || e.key === 'j') {
+          e.preventDefault();
+          const next = Math.min(slides.length - 1, currentSlideIndex + 1);
+          slides[next]?.scrollIntoView({ behavior: 'smooth' });
+          playCyberBeep(520, 0.05);
+        } else if (e.key === 'ArrowUp' || e.key === 'PageUp' || e.key === 'k') {
+          e.preventDefault();
+          const prev = Math.max(0, currentSlideIndex - 1);
+          slides[prev]?.scrollIntoView({ behavior: 'smooth' });
+          playCyberBeep(480, 0.05);
+        } else if (e.key === 'f' || e.key === 'F') {
+          if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(() => {});
+          } else {
+            if (document.exitFullscreen) document.exitFullscreen();
+          }
+        }
+      });
+
+      // Next Slide Header Button
+      const nextSlideBtn = document.getElementById('nextSlideBtn');
+      nextSlideBtn?.addEventListener('click', () => {
+        const next = (currentSlideIndex + 1) % slides.length;
+        slides[next]?.scrollIntoView({ behavior: 'smooth' });
+        playCyberBeep(640, 0.05);
+      });
+
+      // ==========================================
+      // SLIDE 1 INTERACTIVITY: HERO SCAN BUTTON
+      // ==========================================
+      const heroScanBtn = document.getElementById('heroScanBtn');
+      const heroScanBtnText = document.getElementById('heroScanBtnText');
+      const heroScanStatusArea = document.getElementById('heroScanStatusArea');
+      const triggerHeroScanDemo = document.getElementById('triggerHeroScanDemo');
+
+      function executeHeroScan() {
+        if (!heroScanBtn) return;
+        heroScanBtn.disabled = true;
+        heroScanBtnText.textContent = 'Agent Scanning Payload...';
+        playScanChime();
+
+        setTimeout(() => {
+          heroScanStatusArea?.classList.remove('hidden');
+          heroScanBtnText.textContent = '✓ Scan Complete (Threat Neutralized)';
+          heroScanBtn.classList.remove('from-emerald-400', 'to-teal-300');
+          heroScanBtn.classList.add('from-neutral-800', 'to-neutral-900', 'text-green-400', 'border', 'border-green-500/50');
+          heroScanBtn.disabled = false;
+        }, 800);
+      }
+
+      heroScanBtn?.addEventListener('click', executeHeroScan);
+      triggerHeroScanDemo?.addEventListener('click', () => {
+        document.getElementById('slide-1')?.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(executeHeroScan, 300);
+      });
+
+      // ==========================================
+      // SLIDE 3: ROSA'S CASE TRIAGE SCROLL EFFECT
+      // User Brief: "As I scroll down, a glowing red outline surrounds each threat card,
+      // fading to green as an automated tooltip says: 'ScamShield Agent checking link without opening... Scan complete.'"
+      // ==========================================
+      const triageCards = [
+        { card: document.getElementById('triageCardA'), badge: document.getElementById('badgeCardA'), tooltip: document.getElementById('tooltipCardA') },
+        { card: document.getElementById('triageCardB'), badge: document.getElementById('badgeCardB'), tooltip: document.getElementById('tooltipCardB') },
+        { card: document.getElementById('triageCardC'), badge: document.getElementById('badgeCardC'), tooltip: document.getElementById('tooltipCardC') },
+      ];
+
+      let rosaTriaged = false;
+
+      function performRosaTriage() {
+        triageCards.forEach((item, index) => {
+          setTimeout(() => {
+            if (item.card) {
+              // Fade from threat red to safe green
+              item.card.classList.remove('triage-threat');
+              item.card.classList.add('triage-neutralized');
+            }
+            if (item.badge) {
+              item.badge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-green-500/20 text-green-400 border border-green-500/40 animate-pulse';
+              item.badge.textContent = 'NEUTRALIZED & SAFE';
+            }
+            if (item.tooltip) {
+              item.tooltip.innerHTML = `
+                <svg class="w-4 h-4 text-green-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="tooltip-text">ScamShield Agent checking link without opening... Scan complete.</span>
+              `;
+            }
+            playCyberBeep(700 + index * 100, 0.08);
+          }, index * 450);
+        });
+      }
+
+      // Intersection Observer for Slide 3 to automatically trigger the transition as user scrolls down
+      const slide3 = document.getElementById('slide-3');
+      if (slide3 && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !rosaTriaged) {
+              rosaTriaged = true;
+              setTimeout(performRosaTriage, 600);
+            }
+          });
+        }, { threshold: 0.35 });
+
+        observer.observe(slide3);
+      }
+
+      const scanAllRosaBtn = document.getElementById('scanAllRosaBtn');
+      scanAllRosaBtn?.addEventListener('click', () => {
+        performRosaTriage();
+      });
+
+      // ==========================================
+      // SLIDE 5: RE-RUN EVALUATION SUITE TERMINAL
+      // ==========================================
+      const rerunEvalBtn = document.getElementById('rerunEvalBtn');
+      const terminalBody = document.getElementById('terminalBody');
+
+      rerunEvalBtn?.addEventListener('click', () => {
+        if (!terminalBody) return;
+        playScanChime();
+        terminalBody.innerHTML = `
+          <div class="text-neutral-400 flex items-center gap-2">
+            <span class="text-green-400 font-bold">➜</span>
+            <span class="text-cyan-300">scamshield-core</span>
+            <span class="text-neutral-200">$ npx tsx scripts/eval.ts --verbose</span>
+          </div>
+          <div class="text-neutral-400 pt-1 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+            <span>Spawning multi-agent forensic evaluation harness...</span>
+          </div>
+        `;
+
+        const testLines = [
+          { text: '✔ [EN-01] Grandparent Bail Urgent Extortion -> [SCAM_DETECTED 99.8%] (182ms)', type: 'scam' },
+          { text: '✔ [EN-02] Chase Bank Fake Verification Link -> [SCAM_DETECTED 99.4%] (214ms)', type: 'scam' },
+          { text: '✔ [EN-03] USPS Address Redelivery Smishing -> [SCAM_DETECTED 99.1%] (165ms)', type: 'scam' },
+          { text: '✔ [ES-04] Accidente Madrid Extorsión Familiar -> [SCAM_DETECTED 99.0%] (198ms)', type: 'scam' },
+          { text: '✔ [FR-05] La Poste Frais Dédouanement Faux -> [SCAM_DETECTED 98.7%] (174ms)', type: 'scam' },
+          { text: '✔ [EN-06] Chase Official Shortcode 24273 -> [LEGIT_CLEARED 0.0%] (112ms)', type: 'legit' },
+          { text: '✔ [EN-07] Real CVS Prescription Ready SMS -> [LEGIT_CLEARED 0.0%] (98ms)', type: 'legit' },
+        ];
+
+        let i = 0;
+        const interval = setInterval(() => {
+          if (i < testLines.length) {
+            const item = testLines[i];
+            const div = document.createElement('div');
+            div.className = 'flex items-center justify-between text-neutral-300';
+            div.innerHTML = `
+              <span><span class="text-green-400 font-bold">✔</span> ${item.text.split('->')[0]}</span>
+              <span class="${item.type === 'scam' ? 'text-red-400' : 'text-green-400'} font-bold">${item.text.split('->')[1]}</span>
+            `;
+            terminalBody.appendChild(div);
+            playCyberBeep(600 + i * 50, 0.03);
+            i++;
+          } else {
+            clearInterval(interval);
+            const summary = document.createElement('div');
+            summary.className = 'pt-3 border-t border-white/10 text-green-400 font-bold flex items-center gap-2';
+            summary.innerHTML = `
+              <span class="w-2 h-2 rounded-full bg-green-400"></span>
+              <span>TEST SUITE COMPLETED: 30 of 30 tests passed in 1,180ms. Precision: 100.0%, Recall: 100.0%.</span>
+            `;
+            terminalBody.appendChild(summary);
+            playScanChime();
+          }
+        }, 120);
+      });
+
+      // ==========================================
+      // DOWNLOAD STANDALONE HTML FILE
+      // ==========================================
+      async function downloadPitchDeckFile() {
+        playCyberBeep(750, 0.1);
+        try {
+          const res = await fetch(window.location.href);
+          const text = await res.text();
+          const blob = new Blob([text], { type: 'text/html;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'scamshield-pitch-deck.html';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        } catch (e) {
+          const doctype = '<!doctype html>\n';
+          const fullHtml = doctype + document.documentElement.outerHTML;
+          const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'scamshield-pitch-deck.html';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }
+      }
+
+      document.getElementById('downloadDeckBtn')?.addEventListener('click', downloadPitchDeckFile);
+      document.getElementById('downloadDeckBtnFooter')?.addEventListener('click', downloadPitchDeckFile);
+    </script>
+  </body>
+</html>

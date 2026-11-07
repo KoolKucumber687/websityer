@@ -1,0 +1,6 @@
+{
+  "name": "ScamShield - Cinematic Pitch Deck",
+  "description": "Ultra-premium, scroll-driven cinematic presentation pitch deck for ScamShield: One Click. Zero Scams.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
